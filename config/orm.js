@@ -60,7 +60,6 @@ var orm = {
         var query = "DELETE FROM " + tableName;
         query += " WHERE ";
         query += condition;
-        console.log(query)
         connection.query(query, function (err, result) {
             if (err) throw err
             cb(result)

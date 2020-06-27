@@ -19,7 +19,8 @@
         </div>
         <div class="col-lg-4 col-sm-12">
             <form class="add-burger create-form">
-                <textarea type="text" rows="3" cols="41" id="add-burger" name="burger_name" class="center"></textarea>
+                <textarea type="text" rows="3" cols="41" id="add-burger" name="burger_name" class="center"
+                    placeholder="Enter a Burger That You Would Like to Eat"></textarea>
                 {{!-- <div class="row"> --}}
                 <button type="submit" class="btn btn-primary btn-sm submit">Submit</button>
                 {{!-- </div> --}}
@@ -33,7 +34,7 @@
                     {{!-- this.name is the column name from db --}}
                     {{this.id}}. {{this.burger_name}}
                     <button class="delete-it btn btn-outline-danger btn-sm" data-burgerid="{{this.id}}">
-                        Delete it!
+                        Digest it!
                     </button>
                 </p>
                 {{/if}}
