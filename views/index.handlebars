@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12">
+            <ul>
+                {{#each burgers}}
+                {{#unless devoured}}
+                <p>
+                    {{!-- this.name is the column name from db --}}
+                    {{this.id}}. {{this.burger_name}}
+
+                    <button type="button" class="devour-it btn btn-outline-success btn-sm" data-burgerid="{{this.id}}"
+                        data-devoured="{{true}}">
+                        Devour it!
+                    </button>
+                </p>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <form class="add-burger create-form">
+                <textarea type="text" rows="3" cols="41" id="add-burger" name="burger_name" class="center"></textarea>
+                {{!-- <div class="row"> --}}
+                <button type="submit" class="btn btn-primary btn-sm submit">Submit</button>
+                {{!-- </div> --}}
+            </form>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <ul>
+                {{#each burgers}}
+                {{#if devoured}}
+                <p>
+                    {{!-- this.name is the column name from db --}}
+                    {{this.id}}. {{this.burger_name}}
+                    <button class="delete-it btn btn-outline-danger btn-sm" data-burgerid="{{this.id}}">
+                        Delete it!
+                    </button>
+                </p>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(".add-burger").on("submit", function (event) {
+        event.preventDefault()
+        var newBurger = {
+            burger_name: $("#add-burger").val().trim()
+        }
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(function () {
+            location.reload()
+        })
+    })
+
+    $(".devour-it").on("click", function (event) {
+        var id = $(this).data("burgerid")
+        var devoured = $(this).data("devoured")
+        var newStatus = {
+            devoured: newStatus
+        }
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newStatus
+        }).then(function () {
+            location.reload()
+        })
+    })
+
+    $(".delete-it").on("click", function (event) {
+        var id = $(this).data("burgerid");
+        $.ajax("/api/burgers/" + id, {
+            type: "DELETE",
+        }).then(function () {
+            location.reload()
+        })
+    })
+
+</script>
